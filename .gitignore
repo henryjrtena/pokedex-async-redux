@@ -1,3 +1,7 @@
+# Build files
+*.g.dart
+*.freezed.dart
+
 # Miscellaneous
 *.class
 *.log
@@ -8,18 +12,12 @@
 .buildlog/
 .history
 .svn/
-migrate_working_dir/
-
-# IntelliJ related
-*.iml
-*.ipr
-*.iws
 .idea/
 
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
 # is commented out by default.
-#.vscode/
+.vscode/
 
 # Flutter/Dart/Pub related
 **/doc/api/
@@ -32,8 +30,8 @@ migrate_working_dir/
 .pub/
 /build/
 
-*.g.dart
-*.freezed.dart
+# Web related
+lib/generated_plugin_registrant.dart
 
 # Symbolication related
 app.*.symbols
