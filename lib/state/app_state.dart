@@ -7,6 +7,7 @@ part 'app_state.g.dart';
 @freezed
 class AppState with _$AppState {
   factory AppState({
+    // TODO: Remove all hard-coded text and create constant.
     @Default('') String sample,
   }) = _AppState;
 

@@ -23,6 +23,7 @@ class HomePage extends StatelessWidget {
       home: Scaffold(
         body: Center(
           child: Text(
+            // TODO: Remove all hard-coded text and create constant.
             'Home Page',
             style: Theme.of(context).textTheme.displayLarge,
           ),
