@@ -5,6 +5,7 @@ import 'package:pokedex_async_redux/api/api_service.dart';
 import 'package:pokedex_async_redux/features/home_page.dart';
 import 'package:pokedex_async_redux/state/app_state.dart';
 
+//TODO: To remove Future<void> and async
 Future<void> main() async {
   final store = Store<AppState>(
     initialState: AppState(),
