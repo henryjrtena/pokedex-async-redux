@@ -20,6 +20,12 @@ Future<void> main() async {
 
   pokemons;
 
+  //TODO: Only for testing. Will remove later.
+  final pokemonDetails =
+      await ApiService().pokemonApi.getPokemonDetails(name: 'bulbasaur');
+
+  pokemonDetails;
+
   runApp(
     StoreProvider(
       store: store,
