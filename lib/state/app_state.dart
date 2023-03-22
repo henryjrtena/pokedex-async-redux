@@ -11,7 +11,7 @@ class AppState with _$AppState {
     // TODO: To remove all hard-coded text and create constant.
     @Default('') String sample,
     @Default(<Pokemon>[]) List<Pokemon> pokemons,
-    @Default(null) PokemonDetails pokemonDetails,
+    @Default(null) PokemonDetails? pokemonDetails,
   }) = _AppState;
 
   factory AppState.fromJson(Map<String, dynamic> json) => _$AppStateFromJson(json);
