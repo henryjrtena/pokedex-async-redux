@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: To be remove for later...
     StoreProvider.dispatch(context, GetPokemonsAction());
-    StoreProvider.dispatch(context, GetPokemonDetailsAction('bulbasaur'));
+    StoreProvider.dispatch(context, GetPokemonDetailsAction(pokemonName: 'bulbasaur'));
 
     return MaterialApp(
       // TODO: To remove all hard-coded text and create constant.
