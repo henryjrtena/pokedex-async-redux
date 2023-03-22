@@ -1,5 +1,4 @@
 import 'package:pokedex_async_redux/state/action/pokemon_actions.dart';
-import 'package:pokedex_async_redux/state/action/pokemon_details_actions.dart';
 import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
 
@@ -8,8 +7,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: To be remove for later...
     StoreProvider.dispatch(context, GetPokemonsAction());
-    StoreProvider.dispatch(context, GetPokemonDetailsAction());
+    StoreProvider.dispatch(context, GetPokemonDetailsAction('bulbasaur'));
 
     return MaterialApp(
       // TODO: To remove all hard-coded text and create constant.
