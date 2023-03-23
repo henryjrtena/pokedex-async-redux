@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pokedex_async_redux/api/model/pokemon_details.dart';
 
 part 'app_state.freezed.dart';
+
 part 'app_state.g.dart';
 
 @freezed
