@@ -1,6 +1,7 @@
 import 'package:pokedex_async_redux/api/model/pokemon.dart';
 import 'package:pokedex_async_redux/utilities/constant.dart';
 import 'package:pokedex_async_redux/utilities/extension/string_extension.dart';
+import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 
 class PokemonCard extends StatelessWidget {
@@ -13,13 +14,11 @@ class PokemonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final imageUri = Uri.parse(imageUrl);
-    final uri = imageUri.replace(path: '${imageUri.path}${pokemon.url.getPokemonId()}.png');
     return Card(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.network('$uri'),
+          Image.network(imageUrl.replaceAll(toBeReplaced, pokemon.url.getPokemonId)),
           Text(
             pokemon.name.capitalize(),
             style: Theme.of(context).textTheme.headlineSmall,
