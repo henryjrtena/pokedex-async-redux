@@ -31,13 +31,16 @@ dependencies:
   flutter:
     sdk: flutter
 
-# architecture
+  # architecture
   async_redux: ^18.0.0
   dio: ^5.0.2
 
   # builder
   freezed_annotation: ^2.2.0
   json_annotation: ^4.8.0
+  
+  # useful extension methods
+  dartx: ^1.1.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
