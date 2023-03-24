@@ -7,21 +7,21 @@ class PokemonCard extends StatelessWidget {
   const PokemonCard({
     super.key,
     required this.pokemon,
-    required this.pokemonId,
   });
 
   final Pokemon pokemon;
-  final int pokemonId;
 
   @override
   Widget build(BuildContext context) {
+    final imageUri = Uri.parse(imageUrl);
+    final uri = imageUri.replace(path: '${imageUri.path}${pokemon.url.getPokemonId()}.png');
     return Card(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.network('$imageUri${pokemonId + 1}.png'),
+          Image.network('$uri'),
           Text(
-            pokemon.name.title(),
+            pokemon.name.capitalize(),
             style: Theme.of(context).textTheme.headlineSmall,
           ),
         ],
