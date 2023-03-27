@@ -18,7 +18,7 @@ class PokemonCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.network(imageUrl.replaceAll(indexKey, pokemon.url.getPokemonId)),
+          Expanded(child: Image.network(imageUrl.replaceAll(indexKey, pokemon.url.getPokemonId))),
           Text(
             pokemon.name.capitalize(),
             style: Theme.of(context).textTheme.headlineSmall,
