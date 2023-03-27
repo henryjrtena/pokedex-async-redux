@@ -7,12 +7,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:pokedex_async_redux/features/pokemon_overview/pokemon_overview_page.dart';
+import 'package:pokedex_async_redux/features/pokemon_overview/pokemon_overview_connector.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const PokemonOverviewPage(pokemons: []));
+    await tester.pumpWidget(const PokemonOverviewConnector());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
