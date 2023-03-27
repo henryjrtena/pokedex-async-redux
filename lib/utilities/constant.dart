@@ -6,3 +6,5 @@ const imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprit
 const indexKey = '[index]';
 const pokemonColumnCount = 2;
 const errorMessage = "Something went wrong!";
+
+const getPokemonActionKey = "get-pokemons-action";
