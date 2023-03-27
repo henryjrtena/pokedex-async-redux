@@ -8,7 +8,7 @@ import 'package:pokedex_async_redux/utilities/constant.dart';
 
 /// Getting of Pokemons from Pokemon API
 class GetPokemonsAction extends LoadingAction {
-  static const key = getPokemonActionKey;
+  static const key = "get-pokemons-action";
 
   GetPokemonsAction() : super(actionKey: key);
 

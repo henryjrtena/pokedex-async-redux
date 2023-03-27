@@ -14,11 +14,12 @@ class PokemonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final pokemonImageUrl = imageUrl.replaceAll(indexKey, pokemon.url.getPokemonId);
     return Card(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(child: Image.network(imageUrl.replaceAll(indexKey, pokemon.url.getPokemonId))),
+          Expanded(child: Image.network(pokemonImageUrl)),
           Text(
             pokemon.name.capitalize(),
             style: Theme.of(context).textTheme.headlineSmall,

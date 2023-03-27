@@ -7,4 +7,6 @@ const indexKey = '[index]';
 const pokemonColumnCount = 2;
 const errorMessage = "Something went wrong!";
 
-const getPokemonActionKey = "get-pokemons-action";
+const closeLabel = 'Close';
+const showDialogTitle = 'Pokedex Message: ';
+const noPokemonsAvailableLabel = "No Pokemon's Available";
