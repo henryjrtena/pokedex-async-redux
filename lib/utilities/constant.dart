@@ -5,7 +5,7 @@ const appName = 'P O K E D E X';
 const imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/[index].png";
 const indexKey = '[index]';
 const pokemonColumnCount = 2;
-const somethingWentWrongLabel = "Something went wrong!";
+const somethingWentWrongMessage = "Something went wrong!";
 
 const noPokemonsAvailableLabel = "No Pokemons Available";
 

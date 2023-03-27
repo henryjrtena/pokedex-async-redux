@@ -24,9 +24,7 @@ class PokemonOverviewPage extends StatelessWidget {
       body: pokemons.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (errorMessage) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            _showErrorMessageSnackbar(errorMessage, context: context);
-          });
+          WidgetsBinding.instance.addPostFrameCallback((_) => _showErrorMessageSnackbar(context, errorMessage));
           return const Center(child: Text(noPokemonsAvailableLabel));
         },
         (data) => GridView.builder(
@@ -42,8 +40,8 @@ class PokemonOverviewPage extends StatelessWidget {
     );
   }
 
-  void _showErrorMessageSnackbar(String? errorMessage, {required BuildContext context}) {
-    final snackBar = SnackBar(content: Text(errorMessage ??= emptyString));
+  void _showErrorMessageSnackbar(BuildContext context, String? errorMessage) {
+    final snackBar = SnackBar(content: Text(errorMessage ?? emptyString));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
