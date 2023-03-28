@@ -13,8 +13,8 @@ class PokemonAboutView extends StatelessWidget {
   });
 
   final Pokemon pokemon;
-  final int? height;
-  final int? weight;
+  final int height;
+  final int weight;
 
   @override
   Widget build(BuildContext context) {
