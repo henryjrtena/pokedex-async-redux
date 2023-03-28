@@ -1,6 +1,5 @@
 import 'package:pokedex_async_redux/api/model/pokemon.dart';
 import 'package:pokedex_async_redux/features/pokemon_details/pokemon_details_connector.dart';
-import 'package:pokedex_async_redux/utilities/constant.dart';
 import 'package:pokedex_async_redux/utilities/extension/string_extension.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
@@ -15,18 +14,9 @@ class PokemonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pokemonImageUrl = imageUrl.replaceAll(indexKey, pokemon.url.getPokemonId);
+    final pokemonImageUrl = pokemon.url.toCustomUrl;
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => PokemonDetailsConnector(
-              pokemon: pokemon,
-            ),
-          ),
-        );
-      },
+      onTap: () => _navigateToPokemonDetailsConnector(context),
       child: Card(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -39,6 +29,13 @@ class PokemonCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  void _navigateToPokemonDetailsConnector(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => PokemonDetailsConnector(pokemon: pokemon)),
     );
   }
 }

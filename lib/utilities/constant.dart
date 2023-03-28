@@ -20,8 +20,11 @@ const statusLabel = 'STATS';
 const movesLabel = 'MOVES';
 const abilitiesLabel = 'ABILITIES';
 
-const maxNumber = 100;
-const heightOfStatusBar = 5.0;
-const space20 = 20.0;
-const wrapRunSpacingForWidgets = 10.0;
+const baseStatMaxNumber = 100;
+const statusBarHeight = 5.0;
+const paddingSpace20 = 20.0;
+const statsMarginVertical = 10.0;
+const tileCardMarginBottom = 10.0;
 const paddingBetweenSide = 40.0;
+
+const numberOfTabView = 4;

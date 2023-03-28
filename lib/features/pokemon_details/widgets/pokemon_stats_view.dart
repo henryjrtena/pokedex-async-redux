@@ -18,13 +18,13 @@ class PokemonStatsView extends StatelessWidget {
   Widget build(BuildContext context) {
     final deviceWidthSize = MediaQuery.of(context).size.width - paddingBetweenSide;
     return Padding(
-      padding: const EdgeInsets.all(space20),
+      padding: const EdgeInsets.all(paddingSpace20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Wrap(
-            runSpacing: wrapRunSpacingForWidgets,
+            runSpacing: statsMarginVertical,
             children: [
               for (var stat in pokemonStats)
                 Column(
@@ -38,7 +38,7 @@ class PokemonStatsView extends StatelessWidget {
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),
                         Text(
-                          _getTheBaseStateLabel(stat.baseStat),
+                          _getBaseStatLabel(stat.baseStat),
                           style: Theme.of(context).textTheme.bodyLarge,
                         )
                       ],
@@ -46,13 +46,13 @@ class PokemonStatsView extends StatelessWidget {
                     Stack(
                       children: [
                         Container(
-                          height: heightOfStatusBar,
+                          height: statusBarHeight,
                           width: deviceWidthSize,
                           color: primaryColor.withOpacity(.5),
                         ),
                         Container(
-                          height: heightOfStatusBar,
-                          width: deviceWidthSize * (stat.baseStat / maxNumber),
+                          height: statusBarHeight,
+                          width: deviceWidthSize * (stat.baseStat / baseStatMaxNumber),
                           color: primaryColor,
                         ),
                       ],
@@ -66,8 +66,5 @@ class PokemonStatsView extends StatelessWidget {
     );
   }
 
-  String _getTheBaseStateLabel(int baseStat) {
-    final maxNumberToDisplay = '$baseStat/${max(baseStat, maxNumber)}';
-    return maxNumberToDisplay;
-  }
+  String _getBaseStatLabel(int baseStat) => '$baseStat/${max(baseStat, baseStatMaxNumber)}';
 }

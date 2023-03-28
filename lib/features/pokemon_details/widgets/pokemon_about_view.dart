@@ -18,7 +18,7 @@ class PokemonAboutView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pokemonImageUrl = imageUrl.replaceAll(indexKey, pokemon.url.getPokemonId);
+    final pokemonImageUrl = pokemon.url.toCustomUrl;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

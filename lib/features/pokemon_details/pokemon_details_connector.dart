@@ -20,7 +20,7 @@ class PokemonDetailsConnector extends StatelessWidget {
       vm: () => PokemonDetailsVmFactory(),
       onInit: (store) => store.dispatchAsync(GetPokemonDetailsAction(pokemonName: pokemon.name)),
       onDispose: (store) => store.dispatchSync(ClearPokemonDetails()),
-      builder: (context, vm) => PokemonDetailsPage(
+      builder: (_, vm) => PokemonDetailsPage(
         pokemonDetails: vm.pokemonDetails,
         pokemon: pokemon,
       ),

@@ -11,32 +11,33 @@ import 'package:flutter/material.dart';
 
 class PokemonDetailsPage extends StatelessWidget {
   const PokemonDetailsPage({
-    required this.pokemonDetails,
     required this.pokemon,
+    required this.pokemonDetails,
     Key? key,
   }) : super(key: key);
 
-  final Async<PokemonDetails?> pokemonDetails;
   final Pokemon pokemon;
+  final Async<PokemonDetails> pokemonDetails;
 
   @override
   Widget build(BuildContext context) {
+    final pokemonDetailsTabs = [
+      const Tab(text: aboutLabel),
+      const Tab(text: statusLabel),
+      const Tab(text: movesLabel),
+      const Tab(text: abilitiesLabel),
+    ];
     return DefaultTabController(
-      length: 4,
+      length: numberOfTabView,
       child: Scaffold(
         appBar: AppBar(
           title: const Text(appName),
           centerTitle: true,
           backgroundColor: primaryColor,
-          bottom: const TabBar(
+          bottom: TabBar(
             indicatorWeight: 5.0,
             indicatorColor: primaryColor,
-            tabs: [
-              Tab(text: aboutLabel),
-              Tab(text: statusLabel),
-              Tab(text: movesLabel),
-              Tab(text: abilitiesLabel),
-            ],
+            tabs: pokemonDetailsTabs,
           ),
         ),
         body: pokemonDetails.when(
@@ -49,7 +50,7 @@ class PokemonDetailsPage extends StatelessWidget {
             children: [
               PokemonAboutView(
                 pokemon: pokemon,
-                height: data!.height,
+                height: data.height,
                 weight: data.weight,
               ),
               PokemonStatsView(pokemonStats: data.stats),

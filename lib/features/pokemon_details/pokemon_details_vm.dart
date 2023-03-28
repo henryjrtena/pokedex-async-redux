@@ -10,11 +10,11 @@ class PokemonDetailsVmFactory extends VmFactory<AppState, PokemonDetailsConnecto
   @override
   Vm fromStore() => PokemonDetailsVm(pokemonDetails: _pokemonDetails());
 
-  Async<PokemonDetails?> _pokemonDetails() {
+  Async<PokemonDetails> _pokemonDetails() {
     if (state.wait.isWaitingFor(GetPokemonDetailsAction.key)) return const Async.loading();
     if (state.pokemonDetails == null) return const Async.error(somethingWentWrongMessage);
 
-    return Async(state.pokemonDetails);
+    return Async(state.pokemonDetails!);
   }
 }
 
@@ -23,5 +23,5 @@ class PokemonDetailsVm extends Vm {
     required this.pokemonDetails,
   }) : super(equals: [pokemonDetails]);
 
-  final Async<PokemonDetails?> pokemonDetails;
+  final Async<PokemonDetails> pokemonDetails;
 }
