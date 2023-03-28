@@ -10,8 +10,8 @@ part 'pokemon_details.g.dart';
 @freezed
 class PokemonDetails with _$PokemonDetails {
   const factory PokemonDetails({
-    @JsonKey(name: 'height') required double height,
-    @JsonKey(name: 'weight') required double weight,
+    @JsonKey(name: 'height') required int height,
+    @JsonKey(name: 'weight') required int weight,
     @JsonKey(name: 'abilities') required List<Ability> abilities,
     @JsonKey(name: 'moves') required List<Move> moves,
     @JsonKey(name: 'stats') required List<Stats> stats,
