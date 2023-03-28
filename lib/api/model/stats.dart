@@ -8,8 +8,8 @@ part 'stats.g.dart';
 @freezed
 class Stats with _$Stats {
   const factory Stats({
-    @JsonKey(name: 'base_stat') required double baseStat,
-    @JsonKey(name: 'effort') required double effort,
+    @JsonKey(name: 'base_stat') required int baseStat,
+    @JsonKey(name: 'effort') required int effort,
     @JsonKey(name: 'stat') required StatInfo stat,
   }) = _Stats;
 
