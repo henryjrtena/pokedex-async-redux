@@ -27,6 +27,7 @@ class PokemonDetailsPage extends StatelessWidget {
       const Tab(text: movesLabel),
       const Tab(text: abilitiesLabel),
     ];
+
     return DefaultTabController(
       length: numberOfTabView,
       child: Scaffold(

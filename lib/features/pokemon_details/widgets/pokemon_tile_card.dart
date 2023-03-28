@@ -33,7 +33,7 @@ class PokemonDetailsTileCard extends StatelessWidget {
             ),
           ),
         ),
-        const VerticalSpacing(height: tileCardMarginBottom)
+        const VerticalSpacing(height: tileCardSpaceBottom)
       ],
     );
   }

@@ -24,7 +24,7 @@ const baseStatMaxNumber = 100;
 const statusBarHeight = 5.0;
 const paddingSpace20 = 20.0;
 const statsMarginVertical = 10.0;
-const tileCardMarginBottom = 10.0;
+const tileCardSpaceBottom = 10.0;
 const paddingBetweenSide = 40.0;
 
 const numberOfTabView = 4;

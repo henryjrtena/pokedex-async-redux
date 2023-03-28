@@ -31,7 +31,7 @@ class PokemonCard extends StatelessWidget {
     );
   }
 
-  void _navigateToPokemonDetailsPage(context) {
+  void _navigateToPokemonDetailsPage(BuildContext context) {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (_) => PokemonDetailsConnector(pokemon: pokemon)),
