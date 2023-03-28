@@ -19,48 +19,44 @@ class PokemonStatsView extends StatelessWidget {
     final deviceWidthSize = MediaQuery.of(context).size.width - paddingBetweenSide;
     return Padding(
       padding: const EdgeInsets.all(paddingSpace20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Wrap(
-            runSpacing: statsMarginVertical,
-            children: [
-              for (var stat in pokemonStats)
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+      child: Wrap(
+        runAlignment: WrapAlignment.start,
+        alignment: WrapAlignment.start,
+        runSpacing: statsMarginVertical,
+        children: [
+          for (var stat in pokemonStats)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          stat.stat.name.capitalize(),
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                        Text(
-                          _getBaseStatLabel(stat.baseStat),
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        )
-                      ],
+                    Text(
+                      stat.stat.name.capitalize(),
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
-                    Stack(
-                      children: [
-                        Container(
-                          height: statusBarHeight,
-                          width: deviceWidthSize,
-                          color: primaryColor.withOpacity(.5),
-                        ),
-                        Container(
-                          height: statusBarHeight,
-                          width: deviceWidthSize * (stat.baseStat / baseStatMaxNumber),
-                          color: primaryColor,
-                        ),
-                      ],
+                    Text(
+                      _getBaseStatLabel(stat.baseStat),
+                      style: Theme.of(context).textTheme.bodyLarge,
                     )
                   ],
-                )
-            ],
-          ),
+                ),
+                Stack(
+                  children: [
+                    Container(
+                      height: statusBarHeight,
+                      width: deviceWidthSize,
+                      color: primaryColor.withOpacity(.5),
+                    ),
+                    Container(
+                      height: statusBarHeight,
+                      width: deviceWidthSize * (stat.baseStat / baseStatMaxNumber),
+                      color: primaryColor,
+                    ),
+                  ],
+                ),
+              ],
+            ),
         ],
       ),
     );

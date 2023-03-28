@@ -6,7 +6,5 @@ extension StringExtension on String {
     return patterns[patterns.length - 2];
   }
 
-  String get toCustomUrl {
-    return imageUrl.replaceAll(indexKey, getPokemonId);
-  }
+  String get toCustomUrl => imageUrl.replaceAll(indexKey, getPokemonId);
 }

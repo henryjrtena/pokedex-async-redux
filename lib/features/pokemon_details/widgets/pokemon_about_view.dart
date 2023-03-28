@@ -18,11 +18,10 @@ class PokemonAboutView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pokemonImageUrl = pokemon.url.toCustomUrl;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.network(pokemonImageUrl),
+        Image.network(pokemon.url.toCustomUrl),
         Text(
           pokemon.name.capitalize(),
           style: Theme.of(context).textTheme.headlineSmall,

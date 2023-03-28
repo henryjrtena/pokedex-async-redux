@@ -15,7 +15,9 @@ class PokemonAbilitiesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.all(paddingSpace20),
-      children: [for (var ability in pokemonAbilities) PokemonDetailsTileCard(title: ability.ability.name)],
+      children: [
+        for (var ability in pokemonAbilities) PokemonDetailsTileCard(title: ability.ability.name),
+      ],
     );
   }
 }

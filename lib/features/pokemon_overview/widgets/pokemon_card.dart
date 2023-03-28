@@ -14,14 +14,13 @@ class PokemonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pokemonImageUrl = pokemon.url.toCustomUrl;
     return GestureDetector(
-      onTap: () => _navigateToPokemonDetailsConnector(context),
+      onTap: () => _navigateToPokemonDetailsPage(context),
       child: Card(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(child: Image.network(pokemonImageUrl)),
+            Expanded(child: Image.network(pokemon.url.toCustomUrl)),
             Text(
               pokemon.name.capitalize(),
               style: Theme.of(context).textTheme.headlineSmall,
@@ -32,7 +31,7 @@ class PokemonCard extends StatelessWidget {
     );
   }
 
-  void _navigateToPokemonDetailsConnector(context) {
+  void _navigateToPokemonDetailsPage(context) {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (_) => PokemonDetailsConnector(pokemon: pokemon)),

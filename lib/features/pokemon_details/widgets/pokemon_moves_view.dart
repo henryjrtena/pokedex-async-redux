@@ -15,7 +15,9 @@ class PokemonMovesView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.all(paddingSpace20),
-      children: [for (var move in pokemonMoves) PokemonDetailsTileCard(title: move.move.name)],
+      children: [
+        for (var move in pokemonMoves) PokemonDetailsTileCard(title: move.move.name),
+      ],
     );
   }
 }
