@@ -8,20 +8,29 @@ import 'package:async_redux/async_redux.dart';
 
 class PokemonOverviewVmFactory extends VmFactory<AppState, PokemonOverviewConnector> {
   @override
-  Vm fromStore() => PokemonOverviewVm(pokemons: _pokemons());
+  Vm fromStore() => PokemonOverviewVm(pokemons: _pokemons, searchPokemons: _searchPokemons);
 
-  Async<List<Pokemon>> _pokemons() {
+  Async<List<Pokemon>> get _pokemons {
     if (state.wait.isWaitingFor(GetPokemonsAction.key)) return const Async.loading();
     if (state.pokemons.isEmpty) return const Async.error(somethingWentWrongMessage);
 
     return Async(state.pokemons);
+  }
+
+  Async<List<Pokemon>> get _searchPokemons {
+    if (state.wait.isWaitingFor(SearchPokemonsAction.key)) return const Async.loading();
+    if (state.searchPokemons.isEmpty) return const Async.error(noPokemonSearchResult);
+
+    return Async(state.searchPokemons);
   }
 }
 
 class PokemonOverviewVm extends Vm {
   PokemonOverviewVm({
     required this.pokemons,
-  }) : super(equals: [pokemons]);
+    required this.searchPokemons,
+  }) : super(equals: [pokemons, searchPokemons]);
 
   final Async<List<Pokemon>> pokemons;
+  final Async<List<Pokemon>> searchPokemons;
 }

@@ -34,6 +34,29 @@ class GetPokemonDetailsAction extends LoadingAction {
   }
 }
 
+/// Filters the pokemons in the state the stored the filtered into the searchPokemon state
+class SearchPokemonsAction extends LoadingAction {
+  static const key = "search-pokemons-action";
+
+  SearchPokemonsAction({required this.searchText}) : super(actionKey: key);
+
+  final String searchText;
+
+  @override
+  AppState reduce() {
+    final pokemons = state.pokemons.where((pokemon) => pokemon.name.contains(searchText.toLowerCase())).toList();
+    return state.copyWith(searchPokemons: pokemons);
+  }
+
+  bool get isActive => searchText.isNotEmpty;
+}
+
+/// Clear the searchPokemon state to empty
+class ClearSearchPokemon extends ReduxAction<AppState> {
+  @override
+  AppState reduce() => state.copyWith(searchPokemons: List.empty());
+}
+
 /// Clears the pokemonDetails state to null
 class ClearPokemonDetails extends ReduxAction<AppState> {
   @override

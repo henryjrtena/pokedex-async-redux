@@ -13,9 +13,9 @@ void main() {
   runApp(
     StoreProvider(
       store: store,
-      child: const MaterialApp(
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: PokemonOverviewConnector(),
+        home: PokemonOverviewConnector(store: store),
       ),
     ),
   );
