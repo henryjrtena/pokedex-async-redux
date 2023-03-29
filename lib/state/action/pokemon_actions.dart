@@ -35,10 +35,8 @@ class GetPokemonDetailsAction extends LoadingAction {
 }
 
 /// Filters the pokemons in the state the stored the filtered into the searchPokemon state
-class SearchPokemonsAction extends LoadingAction {
-  static const key = "search-pokemons-action";
-
-  SearchPokemonsAction({required this.searchText}) : super(actionKey: key);
+class SearchPokemonsAction extends ReduxAction<AppState> {
+  SearchPokemonsAction({required this.searchText});
 
   final String searchText;
 
@@ -50,8 +48,6 @@ class SearchPokemonsAction extends LoadingAction {
       isSearching: true,
     );
   }
-
-  bool get isActive => searchText.isNotEmpty;
 }
 
 /// Clear the searchPokemon state to empty

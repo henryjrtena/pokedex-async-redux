@@ -7,11 +7,8 @@ import 'package:flutter/material.dart';
 
 class PokemonOverviewConnector extends StatelessWidget {
   const PokemonOverviewConnector({
-    required this.store,
     Key? key,
   }) : super(key: key);
-
-  final Store<AppState> store;
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +17,9 @@ class PokemonOverviewConnector extends StatelessWidget {
       onInit: (store) => store.dispatchAsync(GetPokemonsAction()),
       builder: (context, vm) => PokemonOverviewPage(
         pokemons: vm.pokemons,
-        onSearchPokemons: onSearchPokemons,
-        onClearSearchPokemons: onClearSearchPokemons,
+        onSearchPokemons: vm.onSearchPokemons,
+        onClearSearchPokemons: vm.onClearSearchPokemons,
       ),
     );
   }
-
-  void onSearchPokemons(String searchText) => store.dispatchSync(SearchPokemonsAction(searchText: searchText));
-
-  void onClearSearchPokemons() => store.dispatchSync(ClearSearchPokemon());
 }
