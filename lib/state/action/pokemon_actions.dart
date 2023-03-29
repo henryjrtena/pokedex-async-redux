@@ -45,7 +45,10 @@ class SearchPokemonsAction extends LoadingAction {
   @override
   AppState reduce() {
     final pokemons = state.pokemons.where((pokemon) => pokemon.name.contains(searchText.toLowerCase())).toList();
-    return state.copyWith(searchPokemons: pokemons);
+    return state.copyWith(
+      searchPokemons: pokemons,
+      isSearching: true,
+    );
   }
 
   bool get isActive => searchText.isNotEmpty;
@@ -54,7 +57,7 @@ class SearchPokemonsAction extends LoadingAction {
 /// Clear the searchPokemon state to empty
 class ClearSearchPokemon extends ReduxAction<AppState> {
   @override
-  AppState reduce() => state.copyWith(searchPokemons: List.empty());
+  AppState reduce() => state.copyWith(searchPokemons: List.empty(), isSearching: false);
 }
 
 /// Clears the pokemonDetails state to null

@@ -11,14 +11,12 @@ import 'package:flutter/material.dart';
 class PokemonOverviewPage extends StatefulWidget {
   const PokemonOverviewPage({
     required this.pokemons,
-    required this.searchPokemons,
     required this.onSearchPokemons,
     required this.onClearSearchPokemons,
     Key? key,
   }) : super(key: key);
 
   final Async<List<Pokemon>> pokemons;
-  final Async<List<Pokemon>> searchPokemons;
   final Function(String) onSearchPokemons;
   final VoidCallback onClearSearchPokemons;
 
@@ -60,44 +58,37 @@ class _PokemonOverviewPageState extends State<PokemonOverviewPage> {
               decoration: InputDecoration(
                 iconColor: primaryColor,
                 prefixIcon: searchIcon,
-                suffixIcon: IconButton(
-                  onPressed: () {
-                    widget.onClearSearchPokemons();
-                    clearTextField();
-                  },
-                  icon: closeRoundIcon,
-                ),
+                suffixIcon: _searchController.text.isNotEmpty
+                    ? IconButton(
+                        onPressed: () {
+                          widget.onClearSearchPokemons();
+                          _clearTextField();
+                        },
+                        icon: closeRoundIcon,
+                      )
+                    : null,
               ),
             ),
           ),
           Expanded(
-            child: _debounce != null
-                ? widget.searchPokemons.when(
-                    loading: () => const LoadingIndicator(),
-                    error: (errorMessage) {
-                      WidgetsBinding.instance
-                          .addPostFrameCallback((_) => _showErrorMessageSnackbar(context, errorMessage));
-                      return const Center(child: Text(noPokemonSearchResult));
-                    },
-                    (data) => PokemonGridView(pokemons: data),
-                  )
-                : widget.pokemons.when(
-                    loading: () => const LoadingIndicator(),
-                    error: (errorMessage) {
-                      WidgetsBinding.instance
-                          .addPostFrameCallback((_) => _showErrorMessageSnackbar(context, errorMessage));
-                      return const Center(child: Text(somethingWentWrongMessage));
-                    },
-                    (data) => PokemonGridView(pokemons: data),
-                  ),
+            child: widget.pokemons.when(
+              loading: () => const LoadingIndicator(),
+              error: (errorMessage) {
+                if (_searchController.text.isEmpty) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) => _showErrorMessageSnackbar());
+                }
+                return Center(child: Text(errorMessage!));
+              },
+              (data) => PokemonGridView(pokemons: data),
+            ),
           )
         ],
       ),
     );
   }
 
-  void _showErrorMessageSnackbar(BuildContext context, String? errorMessage) {
-    final snackBar = SnackBar(content: Text(errorMessage ?? emptyString));
+  void _showErrorMessageSnackbar() {
+    const snackBar = SnackBar(content: Text(somethingWentWrongMessage));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
@@ -106,5 +97,5 @@ class _PokemonOverviewPageState extends State<PokemonOverviewPage> {
     _debounce = Timer(const Duration(milliseconds: 1000), () => widget.onSearchPokemons(_searchController.text));
   }
 
-  void clearTextField() => setState(() => _searchController.text = emptyString);
+  void _clearTextField() => setState(() => _searchController.text = emptyString);
 }
