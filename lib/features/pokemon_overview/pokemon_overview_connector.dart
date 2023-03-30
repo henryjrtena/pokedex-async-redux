@@ -6,9 +6,7 @@ import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
 
 class PokemonOverviewConnector extends StatelessWidget {
-  const PokemonOverviewConnector({
-    Key? key,
-  }) : super(key: key);
+  const PokemonOverviewConnector({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +15,7 @@ class PokemonOverviewConnector extends StatelessWidget {
       onInit: (store) => store.dispatchAsync(GetPokemonsAction()),
       builder: (context, vm) => PokemonOverviewPage(
         pokemons: vm.pokemons,
+        searchedPokemons: vm.searchedPokemons,
         onSearchedPokemons: vm.onSearchedPokemons,
         onClearSearchedPokemons: vm.onClearSearchedPokemons,
       ),

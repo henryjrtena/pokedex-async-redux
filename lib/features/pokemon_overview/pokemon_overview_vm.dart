@@ -4,40 +4,41 @@ import 'package:pokedex_async_redux/state/action/pokemon_actions.dart';
 import 'package:pokedex_async_redux/utilities/async.dart';
 import 'package:pokedex_async_redux/api/model/pokemon.dart';
 import 'package:pokedex_async_redux/state/app_state.dart';
-import 'package:flutter/material.dart';
 import 'package:async_redux/async_redux.dart';
+import 'package:flutter/material.dart';
 
 class PokemonOverviewVmFactory extends VmFactory<AppState, PokemonOverviewConnector> {
   @override
   Vm fromStore() => PokemonOverviewVm(
-        pokemons: _pokemons,
+        pokemons: _pokemons(),
+        searchedPokemons: state.searchedPokemons,
         onSearchedPokemons: _onSearchedPokemons,
         onClearSearchedPokemons: _onClearSearchedPokemons,
       );
 
-  Async<List<Pokemon>> get _pokemons {
+  Async<List<Pokemon>> _pokemons() {
     if (state.wait.isWaitingFor(GetPokemonsAction.key)) return const Async.loading();
 
     if (state.pokemons.isEmpty) return const Async.error(noPokemonsAvailableLabel);
 
-    if (state.isSearching && state.searchPokemons.isEmpty) return const Async.error(noPokemonSearchResult);
-
-    return Async(state.isSearching ? state.searchPokemons : state.pokemons);
+    return Async(state.pokemons);
   }
 
-  void _onSearchedPokemons(String searchText) => dispatchSync(SearchPokemonsAction(searchText: searchText));
+  void _onSearchedPokemons(searchText) => dispatchSync(SearchPokemonsAction(searchText: searchText));
 
-  void _onClearSearchedPokemons() => dispatchSync(ClearSearchPokemon());
+  void _onClearSearchedPokemons() => dispatchSync(ClearSearchedPokemonAction());
 }
 
 class PokemonOverviewVm extends Vm {
   PokemonOverviewVm({
     required this.pokemons,
+    required this.searchedPokemons,
     required this.onSearchedPokemons,
     required this.onClearSearchedPokemons,
-  }) : super(equals: [pokemons]);
+  }) : super(equals: [pokemons, searchedPokemons]);
 
   final Async<List<Pokemon>> pokemons;
-  final Function(String) onSearchedPokemons;
+  final List<Pokemon> searchedPokemons;
+  final ValueChanged onSearchedPokemons;
   final VoidCallback onClearSearchedPokemons;
 }

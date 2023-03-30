@@ -1,23 +1,24 @@
 import 'dart:async';
 import 'package:pokedex_async_redux/features/pokemon_overview/widgets/circular_progress_indicator.dart';
-import 'package:pokedex_async_redux/features/pokemon_overview/widgets/pokemon_gridview.dart';
+import 'package:pokedex_async_redux/features/pokemon_overview/widgets/pokemon_card.dart';
 import 'package:pokedex_async_redux/utilities/async.dart';
 import 'package:pokedex_async_redux/utilities/colors.dart';
 import 'package:pokedex_async_redux/utilities/constant.dart';
 import 'package:pokedex_async_redux/api/model/pokemon.dart';
-import 'package:pokedex_async_redux/utilities/icons.dart';
 import 'package:flutter/material.dart';
 
 class PokemonOverviewPage extends StatefulWidget {
   const PokemonOverviewPage({
     required this.pokemons,
+    required this.searchedPokemons,
     required this.onSearchedPokemons,
     required this.onClearSearchedPokemons,
     Key? key,
   }) : super(key: key);
 
   final Async<List<Pokemon>> pokemons;
-  final Function(String) onSearchedPokemons;
+  final List<Pokemon> searchedPokemons;
+  final ValueChanged onSearchedPokemons;
   final VoidCallback onClearSearchedPokemons;
 
   @override
@@ -25,13 +26,13 @@ class PokemonOverviewPage extends StatefulWidget {
 }
 
 class _PokemonOverviewPageState extends State<PokemonOverviewPage> {
-  final TextEditingController _searchController = TextEditingController();
-  bool _isSearchedPokemonEmpty = false;
+  late final TextEditingController _searchController;
   Timer? _debounce;
 
   @override
   void initState() {
     super.initState();
+    _searchController = TextEditingController();
     _searchController.addListener(_onSearchChanged);
   }
 
@@ -39,6 +40,8 @@ class _PokemonOverviewPageState extends State<PokemonOverviewPage> {
   void dispose() {
     _debounce?.cancel();
     _searchController.dispose();
+    _searchController.removeListener(_onSearchChanged);
+    _onDisposeSearchedPokemons();
     super.dispose();
   }
 
@@ -58,28 +61,50 @@ class _PokemonOverviewPageState extends State<PokemonOverviewPage> {
               controller: _searchController,
               decoration: InputDecoration(
                 iconColor: primaryColor,
-                prefixIcon: searchIcon,
+                prefixIcon: const Icon(Icons.search),
                 suffixIcon: _searchController.text.isNotEmpty
                     ? IconButton(
-                        onPressed: _clearTextField,
-                        icon: closeRoundIcon,
+                        onPressed: () {
+                          _onClearTextField();
+                          if (_searchController.text.isNotEmpty) return;
+                          _onDisposeSearchedPokemons();
+                        },
+                        icon: const Icon(Icons.close_rounded),
                       )
                     : null,
               ),
             ),
           ),
           Expanded(
-            child: widget.pokemons.when(
-              loading: () => const LoadingIndicator(),
-              error: (errorMessage) {
-                if (_searchController.text.isEmpty && !_isSearchedPokemonEmpty) {
-                  WidgetsBinding.instance.addPostFrameCallback((_) => _showErrorMessageSnackbar());
-                }
-                _setIsSearchedPokemon(true);
-                return Center(child: Text(errorMessage!));
-              },
-              (data) => PokemonGridView(pokemons: data),
-            ),
+            child: _searchController.text.isNotEmpty
+                ? widget.searchedPokemons.isEmpty
+                    ? const Center(child: Text(noPokemonSearchResult))
+                    : GridView.builder(
+                        padding: const EdgeInsets.all(10.0),
+                        itemCount: widget.searchedPokemons.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: pokemonColumnCount),
+                        itemBuilder: (_, index) {
+                          final pokemon = widget.searchedPokemons[index];
+                          return PokemonCard(pokemon: pokemon);
+                        },
+                      )
+                : widget.pokemons.when(
+                    loading: () => const LoadingIndicator(),
+                    error: (errorMessage) {
+                      WidgetsBinding.instance.addPostFrameCallback((_) => _showErrorMessageSnackbar());
+                      return Center(child: Text(errorMessage ?? emptyString));
+                    },
+                    (pokemons) => GridView.builder(
+                      padding: const EdgeInsets.all(10.0),
+                      itemCount: pokemons.length,
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: pokemonColumnCount),
+                      itemBuilder: (_, index) {
+                        final pokemon = pokemons[index];
+                        return PokemonCard(pokemon: pokemon);
+                      },
+                    ),
+                  ),
           )
         ],
       ),
@@ -96,11 +121,7 @@ class _PokemonOverviewPageState extends State<PokemonOverviewPage> {
     _debounce = Timer(const Duration(milliseconds: 1000), () => widget.onSearchedPokemons(_searchController.text));
   }
 
-  void _setIsSearchedPokemon(bool setTo) => setState(() => _isSearchedPokemonEmpty = setTo);
+  void _onClearTextField() => _searchController.clear();
 
-  void _clearTextField() {
-    setState(() => _searchController.clear());
-    if (_isSearchedPokemonEmpty) return;
-    widget.onClearSearchedPokemons();
-  }
+  void _onDisposeSearchedPokemons() => widget.onClearSearchedPokemons();
 }

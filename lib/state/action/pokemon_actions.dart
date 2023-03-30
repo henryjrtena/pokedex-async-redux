@@ -42,22 +42,20 @@ class SearchPokemonsAction extends ReduxAction<AppState> {
 
   @override
   AppState reduce() {
-    final pokemons = state.pokemons.where((pokemon) => pokemon.name.contains(searchText.toLowerCase())).toList();
-    return state.copyWith(
-      searchPokemons: pokemons,
-      isSearching: true,
-    );
+    final searchedPokemons =
+        state.pokemons.where((pokemon) => pokemon.name.contains(searchText.toLowerCase())).toList();
+    return state.copyWith(searchedPokemons: searchedPokemons);
   }
 }
 
 /// Clear the searchPokemon state to empty
-class ClearSearchPokemon extends ReduxAction<AppState> {
+class ClearSearchedPokemonAction extends ReduxAction<AppState> {
   @override
-  AppState reduce() => state.copyWith(searchPokemons: List.empty(), isSearching: false);
+  AppState reduce() => state.copyWith(searchedPokemons: List.empty());
 }
 
 /// Clears the pokemonDetails state to null
-class ClearPokemonDetails extends ReduxAction<AppState> {
+class ClearPokemonDetailsAction extends ReduxAction<AppState> {
   @override
   AppState reduce() => state.copyWith(pokemonDetails: null);
 }
