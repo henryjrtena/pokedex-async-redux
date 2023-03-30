@@ -17,8 +17,8 @@ class PokemonOverviewConnector extends StatelessWidget {
       onInit: (store) => store.dispatchAsync(GetPokemonsAction()),
       builder: (context, vm) => PokemonOverviewPage(
         pokemons: vm.pokemons,
-        onSearchPokemons: vm.onSearchPokemons,
-        onClearSearchPokemons: vm.onClearSearchPokemons,
+        onSearchedPokemons: vm.onSearchedPokemons,
+        onClearSearchedPokemons: vm.onClearSearchedPokemons,
       ),
     );
   }
