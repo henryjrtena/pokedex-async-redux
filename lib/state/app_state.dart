@@ -10,9 +10,8 @@ part 'app_state.g.dart';
 @freezed
 class AppState with _$AppState {
   factory AppState({
-    // TODO: To remove all hard-coded text and create constant.
-    @Default('') String sample,
     @Default(<Pokemon>[]) List<Pokemon> pokemons,
+    @Default(<Pokemon>[]) List<Pokemon> searchedPokemons,
     @Default(null) PokemonDetails? pokemonDetails,
 
     // ignored by state

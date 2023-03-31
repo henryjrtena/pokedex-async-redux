@@ -1,5 +1,4 @@
 import 'package:pokedex_async_redux/utilities/colors.dart';
-import 'package:pokedex_async_redux/utilities/constant.dart';
 import 'package:pokedex_async_redux/utilities/spacing.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +32,7 @@ class PokemonDetailsTileCard extends StatelessWidget {
             ),
           ),
         ),
-        const VerticalSpacing(height: tileCardSpaceBottom)
+        const VerticalSpacing(height: 10.0)
       ],
     );
   }
