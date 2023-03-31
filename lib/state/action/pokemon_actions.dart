@@ -34,7 +34,7 @@ class GetPokemonDetailsAction extends LoadingAction {
   }
 }
 
-/// Filters the pokemons in the state the stored the filtered into the searchPokemon state
+/// This Action performs a filter on the pokemons using the provided search criteria.
 class SearchPokemonsAction extends ReduxAction<AppState> {
   SearchPokemonsAction({required this.searchText});
 
@@ -48,7 +48,7 @@ class SearchPokemonsAction extends ReduxAction<AppState> {
   }
 }
 
-/// Clear the searchPokemon state to empty
+/// Clears the searchPokemons state to empty
 class ClearSearchedPokemonAction extends ReduxAction<AppState> {
   @override
   AppState reduce() => state.copyWith(searchedPokemons: List.empty());

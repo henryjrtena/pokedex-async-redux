@@ -11,7 +11,7 @@ class PokemonOverviewVmFactory extends VmFactory<AppState, PokemonOverviewConnec
   @override
   Vm fromStore() => PokemonOverviewVm(
         pokemons: _pokemons(),
-        searchedPokemons: _searchedPokemon,
+        searchedPokemons: _searchedPokemons,
         onSearchedPokemons: _onSearchedPokemons,
         onClearSearchedPokemons: _onClearSearchedPokemons,
       );
@@ -24,7 +24,7 @@ class PokemonOverviewVmFactory extends VmFactory<AppState, PokemonOverviewConnec
     return Async(state.pokemons);
   }
 
-  List<Pokemon> get _searchedPokemon => state.searchedPokemons;
+  List<Pokemon> get _searchedPokemons => state.searchedPokemons;
 
   void _onSearchedPokemons(searchText) => dispatchSync(SearchPokemonsAction(searchText: searchText));
 
@@ -37,7 +37,10 @@ class PokemonOverviewVm extends Vm {
     required this.searchedPokemons,
     required this.onSearchedPokemons,
     required this.onClearSearchedPokemons,
-  }) : super(equals: [pokemons, searchedPokemons]);
+  }) : super(equals: [
+          pokemons,
+          searchedPokemons,
+        ]);
 
   final Async<List<Pokemon>> pokemons;
   final List<Pokemon> searchedPokemons;
