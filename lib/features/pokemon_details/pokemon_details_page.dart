@@ -45,7 +45,7 @@ class PokemonDetailsPage extends StatelessWidget {
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (errorMessage) {
             WidgetsBinding.instance.addPostFrameCallback((_) => _showErrorMessageSnackbar(context, errorMessage));
-            return const Center(child: Text(noPokemonDetailsAvailableText));
+            return const Center(child: Text(noPokemonDetailsAvailableLabel));
           },
           (data) => TabBarView(
             children: [

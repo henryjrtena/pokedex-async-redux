@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 
 class PokemonCard extends StatelessWidget {
   const PokemonCard({
-    super.key,
     required this.pokemon,
+    super.key,
   });
 
   final Pokemon pokemon;
