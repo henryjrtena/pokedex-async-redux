@@ -32,8 +32,8 @@ class _PokemonOverviewPageState extends State<PokemonOverviewPage> {
   @override
   void initState() {
     super.initState();
-    _searchController = TextEditingController();
-    _searchController.addListener(_onSearchChanged);
+
+    _searchController = TextEditingController()..addListener(_onSearchChanged);
   }
 
   @override
@@ -42,6 +42,7 @@ class _PokemonOverviewPageState extends State<PokemonOverviewPage> {
     _searchController.dispose();
     _searchController.removeListener(_onSearchChanged);
     _onDisposeSearchedPokemons();
+
     super.dispose();
   }
 
