@@ -69,19 +69,23 @@ class AddPokemonToFavoritesAction extends ReduxAction<AppState> {
 
   @override
   AppState reduce() {
-    final index = state.pokemons.indexWhere((p) => p.name == pokemon.name);
-    final pokemons = List.of(state.pokemons);
-    pokemons[index] = pokemons[index].copyWith(isFavorite: !pokemons[index].isFavorite);
-    final favorites = List.of(state.favoritesPokemons);
+    final alteredPokemon = pokemon.copyWith(isFavorite: !pokemon.isFavorite);
 
-    if (favorites.contains(pokemon)) {
-      favorites.remove(pokemon);
+    final pokemons = [...state.pokemons];
+    final indexPokemon = state.pokemons.indexWhere((p) => p.name == pokemon.name);
+    final favoritesPokemon = [...state.favoritesPokemons];
+    final indexFavorite = state.favoritesPokemons.indexWhere((p) => p.name == pokemon.name);
+
+    if (indexFavorite != -1) {
+      favoritesPokemon.removeAt(indexFavorite);
     } else {
-      favorites.add(pokemon);
+      favoritesPokemon.add(alteredPokemon);
     }
 
+    pokemons[indexPokemon] = alteredPokemon;
+
     return state.copyWith(
-      favoritesPokemons: favorites,
+      favoritesPokemons: favoritesPokemon,
       pokemons: pokemons,
     );
   }

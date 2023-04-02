@@ -33,7 +33,7 @@ class _PokemonOverviewPageState extends State<PokemonOverviewPage> {
   void initState() {
     super.initState();
 
-    _searchController = TextEditingController()..addListener(_onSearchChanged);
+    _searchController = TextEditingController();
   }
 
   @override
@@ -53,6 +53,7 @@ class _PokemonOverviewPageState extends State<PokemonOverviewPage> {
           SearchTextField(
             controller: _searchController,
             onPressedCloseButton: _onPressedCloseIconButton,
+            onClearSearchChange: _onSearchChanged,
           ),
           Expanded(
             child: _searchController.text.isNotEmpty
