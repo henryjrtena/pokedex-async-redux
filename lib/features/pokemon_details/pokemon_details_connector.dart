@@ -23,6 +23,7 @@ class PokemonDetailsConnector extends StatelessWidget {
       builder: (_, vm) => PokemonDetailsPage(
         pokemon: pokemon,
         pokemonDetails: vm.pokemonDetails,
+        onAddPokemonToFavorites: vm.onAddPokemonToFavorites,
       ),
     );
   }

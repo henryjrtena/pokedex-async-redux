@@ -11,6 +11,7 @@ part 'app_state.g.dart';
 class AppState with _$AppState {
   factory AppState({
     @Default(<Pokemon>[]) List<Pokemon> pokemons,
+    @Default(<Pokemon>[]) List<Pokemon> favoritesPokemons,
     @Default(<Pokemon>[]) List<Pokemon> searchedPokemons,
     @Default(null) PokemonDetails? pokemonDetails,
 

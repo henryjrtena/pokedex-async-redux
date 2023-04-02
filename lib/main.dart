@@ -1,4 +1,4 @@
-import 'package:pokedex_async_redux/features/pokemon_overview/pokemon_overview_connector.dart';
+import 'package:pokedex_async_redux/features/pokemon_homepage/pokemon_homepage.dart';
 import 'package:pokedex_async_redux/state/app_state.dart';
 import 'package:async_redux/async_redux.dart';
 import 'package:flutter/foundation.dart';
@@ -15,7 +15,7 @@ void main() {
       store: store,
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: PokemonOverviewConnector(),
+        home: PokemonHomePage(),
       ),
     ),
   );

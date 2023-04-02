@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:async_redux/async_redux.dart';
 import 'package:pokedex_async_redux/api/api_service.dart';
+import 'package:pokedex_async_redux/api/model/pokemon.dart';
 import 'package:pokedex_async_redux/state/action/actions.dart';
 import 'package:pokedex_async_redux/state/app_state.dart';
 import 'package:pokedex_async_redux/utilities/constant.dart';
@@ -58,4 +59,30 @@ class ClearSearchedPokemonAction extends ReduxAction<AppState> {
 class ClearPokemonDetailsAction extends ReduxAction<AppState> {
   @override
   AppState reduce() => state.copyWith(pokemonDetails: null);
+}
+
+/// Add Pokemon to the favorites
+class AddPokemonToFavoritesAction extends ReduxAction<AppState> {
+  AddPokemonToFavoritesAction({required this.pokemon});
+
+  final Pokemon pokemon;
+
+  @override
+  AppState reduce() {
+    final index = state.pokemons.indexWhere((p) => p.name == pokemon.name);
+    final pokemons = List.of(state.pokemons);
+    pokemons[index] = pokemons[index].copyWith(isFavorite: !pokemons[index].isFavorite);
+    final favorites = List.of(state.favoritesPokemons);
+
+    if (favorites.contains(pokemon)) {
+      favorites.remove(pokemon);
+    } else {
+      favorites.add(pokemon);
+    }
+
+    return state.copyWith(
+      favoritesPokemons: favorites,
+      pokemons: pokemons,
+    );
+  }
 }

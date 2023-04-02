@@ -13,11 +13,13 @@ class PokemonDetailsPage extends StatelessWidget {
   const PokemonDetailsPage({
     required this.pokemon,
     required this.pokemonDetails,
+    required this.onAddPokemonToFavorites,
     Key? key,
   }) : super(key: key);
 
   final Pokemon pokemon;
   final Async<PokemonDetails> pokemonDetails;
+  final Function(Pokemon) onAddPokemonToFavorites;
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +55,7 @@ class PokemonDetailsPage extends StatelessWidget {
                 pokemon: pokemon,
                 height: data.height,
                 weight: data.weight,
+                onAddToFavorites: onAddPokemonToFavorites,
               ),
               PokemonStatsView(pokemonStats: data.stats),
               PokemonMovesView(pokemonMoves: data.moves),

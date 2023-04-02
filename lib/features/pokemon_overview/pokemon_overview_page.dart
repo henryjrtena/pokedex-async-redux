@@ -3,7 +3,6 @@ import 'package:pokedex_async_redux/features/pokemon_overview/widgets/circular_p
 import 'package:pokedex_async_redux/features/pokemon_overview/widgets/pokemon_gridview.dart';
 import 'package:pokedex_async_redux/features/pokemon_overview/widgets/search_textfield.dart';
 import 'package:pokedex_async_redux/utilities/async.dart';
-import 'package:pokedex_async_redux/utilities/colors.dart';
 import 'package:pokedex_async_redux/utilities/constant.dart';
 import 'package:pokedex_async_redux/api/model/pokemon.dart';
 import 'package:flutter/material.dart';
@@ -49,11 +48,6 @@ class _PokemonOverviewPageState extends State<PokemonOverviewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(appName),
-        centerTitle: true,
-        backgroundColor: primaryColor,
-      ),
       body: Column(
         children: [
           SearchTextField(
