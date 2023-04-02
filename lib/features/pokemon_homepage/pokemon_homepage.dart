@@ -1,5 +1,6 @@
 import 'package:pokedex_async_redux/features/pokemon_Favorites/pokemon_Favorites_connector.dart';
 import 'package:pokedex_async_redux/features/pokemon_overview/pokemon_overview_connector.dart';
+import 'package:pokedex_async_redux/features/pokemon_settings/pokemon_settings_connector.dart';
 import 'package:pokedex_async_redux/utilities/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex_async_redux/utilities/constant.dart';
@@ -15,8 +16,7 @@ class _PokemonHomePageState extends State<PokemonHomePage> {
   static const List<Widget> _viewOptions = <Widget>[
     PokemonOverviewConnector(),
     PokemonFavoritesConnector(),
-    // Todo: To be implemented
-    Text('Setting'),
+    PokemonSettingConnector(),
   ];
 
   int _selectedIndex = 0;
@@ -42,7 +42,6 @@ class _PokemonHomePageState extends State<PokemonHomePage> {
             icon: Icon(Icons.favorite),
             label: 'Favorites',
           ),
-          // Todo: To be implemented for changing the offset and limit
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Setting',

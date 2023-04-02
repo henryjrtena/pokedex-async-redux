@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:async_redux/async_redux.dart';
 import 'package:pokedex_async_redux/api/api_service.dart';
 import 'package:pokedex_async_redux/api/model/pokemon.dart';
+import 'package:pokedex_async_redux/api/model/pokemon_setting.dart';
 import 'package:pokedex_async_redux/state/action/actions.dart';
 import 'package:pokedex_async_redux/state/app_state.dart';
-import 'package:pokedex_async_redux/utilities/constant.dart';
 
 /// Getting of Pokemons from Pokemon API
 class GetPokemonsAction extends LoadingAction {
@@ -15,7 +15,10 @@ class GetPokemonsAction extends LoadingAction {
 
   @override
   Future<AppState> reduce() async {
-    final pokemons = await ApiService().pokemonApi.getPokemonList(offset: offSet, limit: limit);
+    final pokemons = await ApiService().pokemonApi.getPokemonList(
+          offset: state.pokemonSetting.offset,
+          limit: state.pokemonSetting.limit,
+        );
     return state.copyWith(pokemons: pokemons);
   }
 }
@@ -89,4 +92,13 @@ class AddPokemonToFavoritesAction extends ReduxAction<AppState> {
       pokemons: pokemons,
     );
   }
+}
+
+class SaveNewSettingAction extends ReduxAction<AppState> {
+  SaveNewSettingAction({required this.pokemonSetting});
+
+  final PokemonSetting pokemonSetting;
+
+  @override
+  AppState reduce() => state.copyWith(pokemonSetting: pokemonSetting);
 }
