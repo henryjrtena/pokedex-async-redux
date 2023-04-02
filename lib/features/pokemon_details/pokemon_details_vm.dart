@@ -21,9 +21,7 @@ class PokemonDetailsVmFactory extends VmFactory<AppState, PokemonDetailsConnecto
     return Async(state.pokemonDetails!);
   }
 
-  void _onAddPokemonToFavorites(Pokemon pokemon) {
-    dispatch(AddPokemonToFavoritesAction(pokemon: pokemon));
-  }
+  void _onAddPokemonToFavorites(Pokemon pokemon) => dispatch(AddPokemonToFavoritesAction(pokemon: pokemon));
 }
 
 class PokemonDetailsVm extends Vm {

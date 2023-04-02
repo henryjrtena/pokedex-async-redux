@@ -11,9 +11,7 @@ class PokemonFavoritesConnector extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, PokemonFavoritesVm>(
       vm: () => PokemonFavoritesVmFactory(),
-      builder: (context, vm) => PokemonFavoritesPage(
-        pokemons: vm.favoritesPokemons,
-      ),
+      builder: (context, vm) => PokemonFavoritesPage(pokemons: vm.favoritesPokemons),
     );
   }
 }

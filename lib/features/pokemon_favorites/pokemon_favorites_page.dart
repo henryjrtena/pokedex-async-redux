@@ -13,9 +13,7 @@ class PokemonFavoritesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (pokemons.isEmpty) {
-      return const Center(child: Text(noPokemonsAvailableLabel));
-    }
+    if (pokemons.isEmpty) return const Center(child: Text(noPokemonsAvailableLabel));
     return Scaffold(body: PokemonGridView(pokemons: pokemons));
   }
 }

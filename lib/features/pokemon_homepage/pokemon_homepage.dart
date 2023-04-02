@@ -12,13 +12,14 @@ class PokemonHomePage extends StatefulWidget {
 }
 
 class _PokemonHomePageState extends State<PokemonHomePage> {
-  int _selectedIndex = 0;
-
   static const List<Widget> _viewOptions = <Widget>[
     PokemonOverviewConnector(),
     PokemonFavoritesConnector(),
+    // Todo: To be implemented
     Text('Setting'),
   ];
+
+  int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +42,7 @@ class _PokemonHomePageState extends State<PokemonHomePage> {
             icon: Icon(Icons.favorite),
             label: 'Favorites',
           ),
+          // Todo: To be implemented for changing the offset and limit
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Setting',
