@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex_async_redux/api/model/pokemon_setting.dart';
+import 'package:pokedex_async_redux/utilities/colors.dart';
 
 class PokemonSettingPage extends StatefulWidget {
   const PokemonSettingPage({
@@ -39,6 +40,7 @@ class _PokemonSettingPageState extends State<PokemonSettingPage> {
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
               controller: _limitController,
@@ -53,6 +55,7 @@ class _PokemonSettingPageState extends State<PokemonSettingPage> {
                 offset: _offsetController.text,
                 limit: _limitController.text,
               )),
+              style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(primaryColor)),
               child: const Text('Save'),
             ),
           ],
