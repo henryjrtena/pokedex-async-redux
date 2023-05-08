@@ -1,16 +1,35 @@
-# pokedex_async_redux
+# Pokedex
 
-A new Flutter project.
+A Pokedex app made using Flutter.
 
-## Getting Started
+## Screens
 
-This project is a starting point for a Flutter application.
+    -   Pokemon HomePage View
+    -   Pokemon OverView View
+    -   Pokemon Details View
+    -   Pokemon Favorites View
+    -   Pokemon Settings View
 
-A few resources to get you started if this is your first Flutter project:
+## Feature
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+    -   View all pokemons however you can only get 151 pokemons every request.
+    -   You can view the details of the Pokemon like the stats, moves, abilities and the basic info.
+    -   You can heart the pokemon to save it as favorites.
+    -   Settings to get the list of the pokemon using the offset and the limit.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Add-on Feature/s
+
+    -   Error handling for no internet connections.
+
+## Video Recording
+
+    -   <https://user-images.githubusercontent.com/106600653/236780725-bfa1bcb8-339b-4e19-b1bb-fb5dda4edccc.mp4>
+
+## Dependencies
+
+    - Async_Redux
+    - Freezed
+    - DartX
+    - Hive
+    - Dio
+
