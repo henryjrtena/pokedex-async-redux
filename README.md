@@ -23,7 +23,7 @@ A Pokedex app made using Flutter.
 
 ## Video Recording
 
-    -
+    -   https://user-images.githubusercontent.com/106600653/236780725-bfa1bcb8-339b-4e19-b1bb-fb5dda4edccc.mp4
 
 ## Dependencies
 
