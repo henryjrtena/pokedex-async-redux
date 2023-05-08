@@ -34,7 +34,8 @@ class GetPokemonDetailsAction extends LoadingAction {
 
   @override
   Future<AppState> reduce() async {
-    final pokemonDetails = await ApiService().pokemonApi.getPokemonDetails(name: pokemonName);
+    final pokemonDetails =
+        await ApiService().pokemonApi.getPokemonDetails(name: pokemonName);
     return state.copyWith(pokemonDetails: pokemonDetails);
   }
 }
@@ -47,8 +48,9 @@ class SearchPokemonsAction extends ReduxAction<AppState> {
 
   @override
   AppState reduce() {
-    final searchedPokemons =
-        state.pokemons.where((pokemon) => pokemon.name.contains(searchText.toLowerCase())).toList();
+    final searchedPokemons = state.pokemons
+        .where((pokemon) => pokemon.name.contains(searchText.toLowerCase()))
+        .toList();
     return state.copyWith(searchedPokemons: searchedPokemons);
   }
 }
@@ -76,9 +78,11 @@ class AddPokemonToFavoritesAction extends ReduxAction<AppState> {
     final alteredPokemon = pokemon.copyWith(isFavorite: !pokemon.isFavorite);
 
     final pokemons = [...state.pokemons];
-    final indexPokemon = state.pokemons.indexWhere((p) => p.name == pokemon.name);
+    final indexPokemon =
+        state.pokemons.indexWhere((p) => p.name == pokemon.name);
     final favoritesPokemon = [...state.favoritesPokemons];
-    final indexFavorite = state.favoritesPokemons.indexWhere((p) => p.name == pokemon.name);
+    final indexFavorite =
+        state.favoritesPokemons.indexWhere((p) => p.name == pokemon.name);
 
     if (indexFavorite != -1) {
       favoritesPokemon.removeAt(indexFavorite);
@@ -91,7 +95,7 @@ class AddPokemonToFavoritesAction extends ReduxAction<AppState> {
     // Update the Favorite Pokemons in the Hive DB
     final pokedexDB = Hive.box('pokedexDB');
 
-    final favouritesPokemons = [...state.favoritesPokemons, pokemon]
+    final favouritesPokemons = [...favoritesPokemon]
         .map((pokemon) => {
               'name': pokemon.name,
               'url': pokemon.url,
