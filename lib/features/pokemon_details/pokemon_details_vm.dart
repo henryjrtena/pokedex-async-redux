@@ -1,3 +1,4 @@
+import 'package:hive/hive.dart';
 import 'package:pokedex_async_redux/api/model/pokemon.dart';
 import 'package:pokedex_async_redux/api/model/pokemon_details.dart';
 import 'package:pokedex_async_redux/features/pokemon_Details/pokemon_Details_connector.dart';
@@ -15,13 +16,31 @@ class PokemonDetailsVmFactory extends VmFactory<AppState, PokemonDetailsConnecto
       );
 
   Async<PokemonDetails> _pokemonDetails() {
-    if (state.wait.isWaitingFor(GetPokemonDetailsAction.key)) return const Async.loading();
-    if (state.pokemonDetails == null) return const Async.error(somethingWentWrongMessage);
+    if (state.wait.isWaitingFor(GetPokemonDetailsAction.key)) {
+      return const Async.loading();
+    }
+    if (state.pokemonDetails == null) {
+      return const Async.error(somethingWentWrongMessage);
+    }
 
     return Async(state.pokemonDetails!);
   }
 
-  void _onAddPokemonToFavorites(Pokemon pokemon) => dispatch(AddPokemonToFavoritesAction(pokemon: pokemon));
+  void _onAddPokemonToFavorites(Pokemon pokemon) {
+    dispatchAsync(AddPokemonToFavoritesAction(pokemon: pokemon));
+
+    final pokedexDB = Hive.box('pokedexDB');
+
+    final favouritesPokemons = [...state.favoritesPokemons, pokemon]
+        .map((pokemon) => {
+              'name': pokemon.name,
+              'url': pokemon.url,
+              'isFavorite': pokemon.isFavorite,
+            })
+        .toList();
+
+    pokedexDB.put('appState', favouritesPokemons);
+  }
 }
 
 class PokemonDetailsVm extends Vm {

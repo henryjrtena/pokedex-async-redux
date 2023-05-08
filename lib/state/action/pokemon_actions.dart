@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:async_redux/async_redux.dart';
+import 'package:hive/hive.dart';
 import 'package:pokedex_async_redux/api/api_service.dart';
 import 'package:pokedex_async_redux/api/model/pokemon.dart';
 import 'package:pokedex_async_redux/api/model/pokemon_setting.dart';
@@ -71,7 +72,7 @@ class AddPokemonToFavoritesAction extends ReduxAction<AppState> {
   final Pokemon pokemon;
 
   @override
-  AppState reduce() {
+  Future<AppState> reduce() async {
     final alteredPokemon = pokemon.copyWith(isFavorite: !pokemon.isFavorite);
 
     final pokemons = [...state.pokemons];
@@ -86,6 +87,19 @@ class AddPokemonToFavoritesAction extends ReduxAction<AppState> {
     }
 
     pokemons[indexPokemon] = alteredPokemon;
+
+    // Update the Favorite Pokemons in the Hive DB
+    final pokedexDB = Hive.box('pokedexDB');
+
+    final favouritesPokemons = [...state.favoritesPokemons, pokemon]
+        .map((pokemon) => {
+              'name': pokemon.name,
+              'url': pokemon.url,
+              'isFavorite': pokemon.isFavorite,
+            })
+        .toList();
+
+    pokedexDB.put('appState', favouritesPokemons);
 
     return state.copyWith(
       favoritesPokemons: favoritesPokemon,
